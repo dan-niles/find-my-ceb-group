@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
+import {
+	MapContainer,
+	TileLayer,
+	useMapEvents,
+	Marker,
+	Popup,
+} from "react-leaflet";
 
 const Map = () => {
 	function LocationMarker() {
