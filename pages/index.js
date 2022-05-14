@@ -159,23 +159,28 @@ export default function Home() {
 							{!isLoading &&
 								groupList?.map((grp, idx) => {
 									return (
-										<Typography
-											key={idx}
-											variant="h6"
-											component="div"
-											className="font-medium"
-											sx={{
-												display: "flex",
-												flexDirection: "row",
-												alignItems: "center",
-												my: 1,
-											}}
+										<a
+											href={`https://www.ekata.lk/schedule?group=${grp}`}
+											target="_blank"
 										>
-											Group
-											<Avatar sx={{ ml: 0.8, backgroundColor: "#267eca" }}>
-												{grp}
-											</Avatar>
-										</Typography>
+											<Typography
+												key={idx}
+												variant="h6"
+												component="div"
+												className="font-medium"
+												sx={{
+													display: "flex",
+													flexDirection: "row",
+													alignItems: "center",
+													my: 1,
+												}}
+											>
+												Group
+												<Avatar sx={{ ml: 0.8, backgroundColor: "#267eca" }}>
+													{grp}
+												</Avatar>
+											</Typography>
+										</a>
 									);
 								})}
 						</Stack>
