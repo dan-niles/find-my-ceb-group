@@ -1,3 +1,4 @@
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import Layout from "../components/Layout/Layout";
 
@@ -8,10 +9,50 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
+import coordinates from "../public/coordinates.json";
 
-const Map = dynamic(() => import("../components/Map/Map"), { ssr: false });
+const MapLayer = dynamic(() => import("../components/Map/MapLayer"), {
+	ssr: false,
+});
 
 export default function Home() {
+	const classifyPoint = require("robust-point-in-polygon");
+	const [latitude, setLattitude] = useState("");
+	const [longitude, setLongitude] = useState("");
+	const [groupList, setGroupList] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+
+	const getLocation = () => {
+		setIsLoading(true);
+		if ("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				setLattitude(parseFloat(position.coords.latitude));
+				setLongitude(parseFloat(position.coords.longitude));
+				locateGroup(position.coords.latitude, position.coords.longitude);
+				setIsLoading(false);
+			});
+		} else {
+			console.log("Not Available");
+		}
+	};
+
+	const locateGroup = (lat, lon) => {
+		coordinates.forEach((group) => {
+			let group_name = group.group_name;
+			group.zones.forEach((zone) => {
+				let result = classifyPoint(zone, [lat, lon]);
+				if (result == -1) {
+					setGroupList((prev) => [...prev, group_name]);
+					console.log("group found: ", group_name);
+					return;
+				}
+			});
+		});
+	};
+
 	return (
 		<Layout>
 			<Grid container spacing={0}>
@@ -26,13 +67,44 @@ export default function Home() {
 								Find My Group
 							</Typography>
 						</CardContent>
-						{/* <CardActions>
-							<Button size="small">Learn More</Button>
-						</CardActions> */}
+						<CardActions>
+							<Button onClick={getLocation}>Use My Location</Button>
+							{isLoading && <CircularProgress />}
+						</CardActions>
+						<Stack spacing={2} sx={{ mx: 2 }}>
+							<TextField
+								label="Lattitude"
+								variant="outlined"
+								value={latitude}
+								InputProps={{
+									readOnly: true,
+								}}
+							/>
+							<TextField
+								label="Longitude"
+								variant="outlined"
+								value={longitude}
+								InputProps={{
+									readOnly: true,
+								}}
+							/>
+						</Stack>
+						{groupList?.map((grp, idx) => {
+							return (
+								<Typography
+									key={idx}
+									variant="h6"
+									component="div"
+									className="font-medium"
+								>
+									Group {grp}
+								</Typography>
+							);
+						})}
 					</Card>
 				</Grid>
 				<Grid item xs={9}>
-					<Map />
+					<MapLayer latitude={latitude} longitude={longitude} />
 				</Grid>
 			</Grid>
 		</Layout>
