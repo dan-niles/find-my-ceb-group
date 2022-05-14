@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import {
 	MapContainer,
 	TileLayer,
+	useMap,
 	useMapEvents,
 	Marker,
 	Popup,
@@ -10,29 +11,25 @@ import {
 import Button from "@mui/material/Button";
 
 const MapLayer = (props) => {
-	const mapRef = useRef();
 	const defaultPosition = [7.835406, 80.702906];
 	const defaultZoom = 7.5;
 
-	const [position, setPosition] = useState([7.835406, 80.702906]);
+	const [map, setMap] = useState(null);
+	const [position, setPosition] = useState(defaultPosition);
 
-	// useEffect(() => {
-	// 	setPosition([props.latitude, props.longitude]);
-	// 	handleSetView();
-	// }, [props.latitude, props.longitude]);
-
-	const handleSetView = () => {
-		const { current = {} } = mapRef;
-		const { leafletElement: map } = current;
-		console.log(current);
-		map.setView([7.835406, 80.702906]);
+	const MapComponent = () => {
+		const map = useMap();
+		setMap(map);
 	};
+
+	useEffect(() => {
+		setPosition([props.latitude, props.longitude]);
+		map?.flyTo([props.latitude, props.longitude], 13);
+	}, [props.latitude, props.longitude]);
 
 	return (
 		<div style={{ width: "100%", height: "100vh" }}>
-			{/* <Button onClick={handleSetView}>Use My Location</Button> */}
 			<MapContainer
-				ref={mapRef}
 				center={defaultPosition}
 				zoom={defaultZoom}
 				scrollWheelZoom={true}
@@ -42,6 +39,12 @@ const MapLayer = (props) => {
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
+				<MapComponent />
+				<Marker position={position}>
+					<Popup>
+						A pretty CSS3 popup. <br /> Easily customizable.
+					</Popup>
+				</Marker>
 			</MapContainer>
 		</div>
 	);
