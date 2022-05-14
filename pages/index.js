@@ -46,7 +46,6 @@ export default function Home() {
 				let result = classifyPoint(zone, [lat, lon]);
 				if (result == -1) {
 					setGroupList((prev) => [...prev, group_name]);
-					console.log("group found: ", group_name);
 					return;
 				}
 			});
@@ -89,18 +88,20 @@ export default function Home() {
 								}}
 							/>
 						</Stack>
-						{groupList?.map((grp, idx) => {
-							return (
-								<Typography
-									key={idx}
-									variant="h6"
-									component="div"
-									className="font-medium"
-								>
-									Group {grp}
-								</Typography>
-							);
-						})}
+						<Stack spacing={1} sx={{ mx: 2, my: 3 }}>
+							{groupList?.map((grp, idx) => {
+								return (
+									<Typography
+										key={idx}
+										variant="h6"
+										component="div"
+										className="font-medium"
+									>
+										Group {grp}
+									</Typography>
+								);
+							})}
+						</Stack>
 					</Card>
 				</Grid>
 				<Grid item xs={9}>
