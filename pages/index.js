@@ -182,7 +182,13 @@ export default function Home() {
 					</Card>
 				</Grid>
 				<Grid item xs={0} md={9}>
-					<MapLayer latitude={latitude} longitude={longitude} />
+					<MapLayer
+						latitude={latitude}
+						longitude={longitude}
+						locateGroup={locateGroup}
+						setLattitude={setLattitude}
+						setLongitude={setLongitude}
+					/>
 				</Grid>
 			</Grid>
 		</Layout>

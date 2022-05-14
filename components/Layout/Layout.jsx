@@ -6,6 +6,9 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const Layout = (props) => {
 	const theme = createTheme({
+		palette: {
+			mode: "dark",
+		},
 		typography: {
 			fontFamily: [
 				"Inter",

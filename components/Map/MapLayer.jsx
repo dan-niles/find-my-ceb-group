@@ -17,19 +17,25 @@ const MapLayer = (props) => {
 	const [map, setMap] = useState(null);
 	const [position, setPosition] = useState(defaultPosition);
 
-	const MapComponent = () => {
-		const map = useMap();
-		setMap(map);
-	};
-
 	useEffect(() => {
 		setPosition([props.latitude, props.longitude]);
-		map?.flyTo([props.latitude, props.longitude], 13);
+		map?.flyTo([props.latitude, props.longitude]);
 	}, [props.latitude, props.longitude]);
+
+	map?.on("click", function (e) {
+		const coord = e.latlng;
+		const lat = coord.lat;
+		const lng = coord.lng;
+		setPosition([lat, lng]);
+		props.locateGroup(lat, lng);
+		props.setLattitude(lat);
+		props.setLongitude(lng);
+	});
 
 	return (
 		<div style={{ width: "100%", height: "100vh" }}>
 			<MapContainer
+				ref={setMap}
 				center={defaultPosition}
 				zoom={defaultZoom}
 				scrollWheelZoom={true}
@@ -39,7 +45,7 @@ const MapLayer = (props) => {
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
-				<MapComponent />
+				{/* <MapComponent /> */}
 				<Marker position={position}>
 					<Popup>
 						A pretty CSS3 popup. <br /> Easily customizable.
