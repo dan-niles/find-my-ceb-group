@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import Layout from "../components/Layout/Layout";
 
 import { Grid, Container, Paper } from "@mui/material";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -12,6 +11,9 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
+import Avatar from "@mui/material/Avatar";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
+
 import coordinates from "../public/coordinates.json";
 
 const MapLayer = dynamic(() => import("../components/Map/MapLayer"), {
@@ -62,13 +64,19 @@ export default function Home() {
 							<Typography
 								variant="h4"
 								component="div"
-								className="font-semibold"
+								className="font-semibold text-center"
 							>
 								Find My Group
 							</Typography>
 						</CardContent>
 						<CardActions sx={{ justifyContent: "center", my: 3 }}>
-							<Button onClick={getLocation}>Use My Location</Button>
+							<Button
+								onClick={getLocation}
+								variant="outlined"
+								startIcon={<MyLocationIcon />}
+							>
+								Use My Location
+							</Button>
 						</CardActions>
 						<Stack spacing={2} sx={{ mx: 2 }}>
 							<TextField
@@ -106,8 +114,17 @@ export default function Home() {
 											variant="h6"
 											component="div"
 											className="font-medium"
+											sx={{
+												display: "flex",
+												flexDirection: "row",
+												alignItems: "center",
+												my: 1,
+											}}
 										>
-											Group {grp}
+											Group
+											<Avatar sx={{ ml: 0.8, backgroundColor: "#267eca" }}>
+												{grp}
+											</Avatar>
 										</Typography>
 									);
 								})}
