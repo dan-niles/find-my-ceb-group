@@ -163,6 +163,7 @@ export default function Home() {
 											href={`https://www.ekata.lk/schedule?group=${grp}`}
 											target="_blank"
 											key={idx}
+											rel="noreferrer"
 										>
 											<Typography
 												variant="h6"
