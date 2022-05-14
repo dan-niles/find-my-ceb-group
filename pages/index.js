@@ -40,6 +40,7 @@ export default function Home() {
 	};
 
 	const locateGroup = (lat, lon) => {
+		setGroupList([]);
 		coordinates.forEach((group) => {
 			let group_name = group.group_name;
 			group.zones.forEach((zone) => {
@@ -55,7 +56,7 @@ export default function Home() {
 	return (
 		<Layout>
 			<Grid container spacing={0}>
-				<Grid item xs={3} justifyContent="center" alignItems="center">
+				<Grid item xs={12} md={3} justifyContent="center" alignItems="center">
 					<Card sx={{ minHeight: "100vh" }}>
 						<CardContent>
 							<Typography
@@ -66,9 +67,8 @@ export default function Home() {
 								Find My Group
 							</Typography>
 						</CardContent>
-						<CardActions>
+						<CardActions sx={{ justifyContent: "center", my: 3 }}>
 							<Button onClick={getLocation}>Use My Location</Button>
-							{isLoading && <CircularProgress />}
 						</CardActions>
 						<Stack spacing={2} sx={{ mx: 2 }}>
 							<TextField
@@ -88,23 +88,33 @@ export default function Home() {
 								}}
 							/>
 						</Stack>
-						<Stack spacing={1} sx={{ mx: 2, my: 3 }}>
-							{groupList?.map((grp, idx) => {
-								return (
-									<Typography
-										key={idx}
-										variant="h6"
-										component="div"
-										className="font-medium"
-									>
-										Group {grp}
-									</Typography>
-								);
-							})}
+						<Stack
+							spacing={1}
+							sx={{
+								mx: 2,
+								my: 5,
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+						>
+							{isLoading && <CircularProgress />}
+							{!isLoading &&
+								groupList?.map((grp, idx) => {
+									return (
+										<Typography
+											key={idx}
+											variant="h6"
+											component="div"
+											className="font-medium"
+										>
+											Group {grp}
+										</Typography>
+									);
+								})}
 						</Stack>
 					</Card>
 				</Grid>
-				<Grid item xs={9}>
+				<Grid item xs={0} md={9}>
 					<MapLayer latitude={latitude} longitude={longitude} />
 				</Grid>
 			</Grid>
