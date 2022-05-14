@@ -162,9 +162,9 @@ export default function Home() {
 										<a
 											href={`https://www.ekata.lk/schedule?group=${grp}`}
 											target="_blank"
+											key={idx}
 										>
 											<Typography
-												key={idx}
 												variant="h6"
 												component="div"
 												className="font-medium"
