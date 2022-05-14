@@ -123,6 +123,7 @@ export default function Home() {
 							<Button
 								onClick={getLocation}
 								variant="outlined"
+								color="info"
 								startIcon={<MyLocationIcon />}
 							>
 								Use My Location
@@ -177,7 +178,7 @@ export default function Home() {
 												}}
 											>
 												Group
-												<Avatar sx={{ ml: 0.8, backgroundColor: "#267eca" }}>
+												<Avatar sx={{ ml: 0.8, backgroundColor: "#2ab5f6" }}>
 													{grp}
 												</Avatar>
 											</Typography>

@@ -47,9 +47,9 @@ const MapLayer = (props) => {
 				/>
 				{/* <MapComponent /> */}
 				<Marker position={position}>
-					<Popup>
+					{/* <Popup>
 						A pretty CSS3 popup. <br /> Easily customizable.
-					</Popup>
+					</Popup> */}
 				</Marker>
 			</MapContainer>
 		</div>
