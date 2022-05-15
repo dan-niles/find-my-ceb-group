@@ -157,6 +157,9 @@ export default function Home() {
 							}}
 						>
 							{isLoading && <CircularProgress />}
+							{!isLoading && groupList.length > 1 && (
+								<p className="font-light">Possible Groups:</p>
+							)}
 							{!isLoading &&
 								groupList?.map((grp, idx) => {
 									return (
