@@ -18,7 +18,7 @@ const FormWindow = (props) => {
 		>
 			<Stack
 				sx={{
-					minHeight: "100vh%",
+					minHeight: "100vh",
 				}}
 				direction="column"
 				justifyContent="center"
