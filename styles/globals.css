@@ -21,3 +21,16 @@ a {
 * {
 	box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+	background-color: #1e2020;
+	color: #9d978c;
+}
+
+::-webkit-scrollbar-corner {
+	background-color: #171818;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #414444;
+}

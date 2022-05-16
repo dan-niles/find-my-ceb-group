@@ -109,85 +109,99 @@ export default function Home() {
 			</Snackbar>
 			<Grid container spacing={0}>
 				<Grid item xs={12} md={3} justifyContent="center" alignItems="center">
-					<Card sx={{ minHeight: "100vh" }}>
-						<CardContent>
-							<Typography
-								variant="h4"
-								component="div"
-								className="font-semibold text-center"
-							>
-								Find My Group
-							</Typography>
-						</CardContent>
-						<CardActions sx={{ justifyContent: "center", my: 3 }}>
-							<Button
-								onClick={getLocation}
-								variant="outlined"
-								color="info"
-								startIcon={<MyLocationIcon />}
-							>
-								Use My Location
-							</Button>
-						</CardActions>
-						<Stack spacing={2} sx={{ mx: 2, my: 5 }}>
-							<TextField
-								label="Latitude"
-								variant="outlined"
-								value={latitude}
-								InputProps={{
-									readOnly: true,
-								}}
-							/>
-							<TextField
-								label="Longitude"
-								variant="outlined"
-								value={longitude}
-								InputProps={{
-									readOnly: true,
-								}}
-							/>
-						</Stack>
+					<Card
+						sx={{
+							minHeight: "100vh",
+						}}
+					>
 						<Stack
-							spacing={1}
-							sx={{
-								mx: 2,
-								my: 5,
-								justifyContent: "center",
-								alignItems: "center",
-							}}
+							sx={{ minHeight: "100vh" }}
+							direction="column"
+							justifyContent="center"
+							alignItems="center"
 						>
-							{isLoading && <CircularProgress />}
-							{!isLoading && groupList.length > 1 && (
-								<p className="font-light">Possible Groups:</p>
-							)}
-							{!isLoading &&
-								groupList?.map((grp, idx) => {
-									return (
-										<a
-											href={`https://www.ekata.lk/schedule?group=${grp}`}
-											target="_blank"
-											key={idx}
-											rel="noreferrer"
-										>
-											<Typography
-												variant="h6"
-												component="div"
-												className="font-medium"
-												sx={{
-													display: "flex",
-													flexDirection: "row",
-													alignItems: "center",
-													my: 1,
-												}}
+							<CardContent>
+								<Typography
+									variant="h4"
+									component="div"
+									className="font-semibold text-center"
+								>
+									Find My Group
+								</Typography>
+							</CardContent>
+							<CardActions sx={{ justifyContent: "center", my: 3 }}>
+								<Button
+									onClick={getLocation}
+									variant="outlined"
+									color="info"
+									startIcon={<MyLocationIcon />}
+								>
+									Use My Location
+								</Button>
+							</CardActions>
+							<Stack spacing={2} sx={{ mx: 2, my: 5 }}>
+								<TextField
+									label="Latitude"
+									variant="outlined"
+									value={latitude}
+									InputProps={{
+										readOnly: true,
+									}}
+								/>
+								<TextField
+									label="Longitude"
+									variant="outlined"
+									value={longitude}
+									InputProps={{
+										readOnly: true,
+									}}
+								/>
+							</Stack>
+							<Stack
+								spacing={1}
+								sx={{
+									mx: 2,
+									my: 3,
+									px: 6,
+									// justifyContent: "center",
+									// alignItems: "center",
+									overflowY: "auto",
+									height: "15em",
+								}}
+							>
+								{isLoading && <CircularProgress />}
+								{!isLoading && groupList.length > 1 && (
+									<p className="font-light">Possible Groups:</p>
+								)}
+								{!isLoading &&
+									groupList?.map((grp, idx) => {
+										return (
+											<a
+												href={`https://www.ekata.lk/schedule?group=${grp}`}
+												target="_blank"
+												key={idx}
+												rel="noreferrer"
 											>
-												Group
-												<Avatar sx={{ ml: 0.8, backgroundColor: "#2ab5f6" }}>
-													{grp}
-												</Avatar>
-											</Typography>
-										</a>
-									);
-								})}
+												<Typography
+													variant="h6"
+													component="div"
+													className="font-medium"
+													sx={{
+														display: "flex",
+														flexDirection: "row",
+														alignItems: "center",
+														my: 1,
+													}}
+												>
+													Group
+													<Avatar sx={{ ml: 0.8, backgroundColor: "#2ab5f6" }}>
+														{grp}
+													</Avatar>
+												</Typography>
+											</a>
+										);
+									})}
+							</Stack>
 						</Stack>
 					</Card>
 				</Grid>
