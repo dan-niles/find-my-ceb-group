@@ -13,12 +13,12 @@ const FormWindow = (props) => {
 	return (
 		<Card
 			sx={{
-				height: "100vh",
+				minHeight: "100vh",
 			}}
 		>
 			<Stack
 				sx={{
-					minHeight: "100%",
+					minHeight: "100vh%",
 				}}
 				direction="column"
 				justifyContent="center"
