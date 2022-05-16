@@ -2,8 +2,6 @@ import Head from "next/head";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-// import BottomNavBar from "../bottomNavBar/BottomNavBar";
-
 const Layout = (props) => {
 	const theme = createTheme({
 		palette: {
