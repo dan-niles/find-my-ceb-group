@@ -1,3 +1,8 @@
+## Demo
+
+A live demo of this project can be found at [https://find-my-ceb-group.vercel.app/](https://find-my-ceb-group.vercel.app/)
+
+
 ## Getting Started
 
 First, install dependancies using:
