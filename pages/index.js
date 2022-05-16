@@ -131,7 +131,7 @@ export default function Home() {
 						</CardActions>
 						<Stack spacing={2} sx={{ mx: 2, my: 5 }}>
 							<TextField
-								label="Lattitude"
+								label="Latitude"
 								variant="outlined"
 								value={latitude}
 								InputProps={{
